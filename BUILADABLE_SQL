@@ -1,4 +1,5 @@
 --sql day1
+--https://onecompiler.com/mysql/43x2tzhu4 runned and compliled here, https://app.mode.com/tutorial/reports/740ad94d2ef9/details/queries/01012469b18e/data learnt from here 
 CREATE TABLE Customer (
   custId INTEGER ,
   name TEXT NOT NULL,

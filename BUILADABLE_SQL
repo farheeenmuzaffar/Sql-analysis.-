@@ -1,0 +1,26 @@
+--sql day1
+CREATE TABLE Customer (
+  custId INTEGER ,
+  name TEXT NOT NULL,
+  dept TEXT NOT NULL,
+  email TEXT NOT NULL,
+  orderno INTEGER,
+  city TEXT NOT NULL
+);
+
+-- insert
+INSERT INTO Customer VALUES (0001, 'Clar', 'Sales','clar@example.com',20, 'New York');
+INSERT INTO Customer VALUES (0002, 'Dave', 'Accounting','clar@example.com', 300,'New York');
+INSERT INTO Customer VALUES (0003, 'Ava', 'Sales','clar@example.com', 400,'New York');
+
+-- fetch 
+SELECT * FROM Customer;
+--Column Selection
+SELECT name,email,city FROM Customer;
+--WHERE Filtering:
+SELECT * FROM Customer WHERE city = 'New York';
+--Multiple Conditions
+SELECT * from Customer WHERE   orderno = 400 or orderno =  20;
+--ORDER BY
+select name as 'Name'FROM Customer;
+SELECT  * FROM  Customer order by custId;

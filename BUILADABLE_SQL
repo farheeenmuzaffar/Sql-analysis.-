@@ -1,27 +1,57 @@
 --sql day1
 --https://onecompiler.com/mysql/43x2tzhu4 runned and compliled here, https://app.mode.com/tutorial/reports/740ad94d2ef9/details/queries/01012469b18e/data learnt from here 
-CREATE TABLE Customer (
-  custId INTEGER ,
-  name TEXT NOT NULL,
-  dept TEXT NOT NULL,
-  email TEXT NOT NULL,
-  orderno INTEGER,
-  city TEXT NOT NULL
+CREATE TABLE customer (
+    CustomerID INT PRIMARY KEY,
+    Gender VARCHAR(50) NOT NULL,
+    Age INT NOT NULL,
+    `Annual Income ($)` INT NOT NULL,       -- Fixed: using backticks
+    `Spending Score (1-100)` INT NOT NULL,  -- Fixed: using backticks
+    Profession VARCHAR(100),
+    `Work Experience` INT,                  -- Fixed: using backticks
+    `Family Size` INT                       -- Fixed: using backticks and removed semicolon
 );
+ALTER TABLE customer
+ADD COLUMN Registration_Date DATE,
+ADD COLUMN Total_Orders INT;
 
 -- insert
 INSERT INTO Customer VALUES (0001, 'Clar', 'Sales','clar@example.com',20, 'New York');
 INSERT INTO Customer VALUES (0002, 'Dave', 'Accounting','clar@example.com', 300,'New York');
 INSERT INTO Customer VALUES (0003, 'Ava', 'Sales','clar@example.com', 400,'New York');
 
--- fetch 
-SELECT * FROM Customer;
---Column Selection
-SELECT name,email,city FROM Customer;
---WHERE Filtering:
-SELECT * FROM Customer WHERE city = 'New York';
---Multiple Conditions
-SELECT * from Customer WHERE   orderno = 400 or orderno =  20;
---ORDER BY
-select name as 'Name'FROM Customer;
-SELECT  * FROM  Customer order by custId;
+-- Simple SELECT: e.g. Retrieve all columns from a customers table
+-- select * from customer;
+
+-- Column Selection: e.g. Select specific columns (name, email, city) from customers
+-- select CustomerID, `Annual Income ($)` from customer;
+-- select Gender, `spending score (1-100)`, Profession from customer;
+-- select CustomerID,`work Experience` from customer;
+
+-- WHERE Filtering: e.g. Find customers from a specific city
+-- select CustomerID, Profession from customer where Profession = 'Artist';
+-- select CustomerID, `Work Experience` from customer where `Work Experience` in (7,8);
+-- select CustomerID, age,`family size` from customer where age between 25 and 40  and `family size` = 3;
+--select CustomerID,Profession,`work Experience` from customer  where CustomerID = 9 limit 10;
+--Select * from customer where gender ='Female';
+
+-- Multiple Conditions: e.g. Customers from specific cities AND with orders > $100
+-- Multiple Conditions: e.g. Customers from specific cities AND with orders > $100
+UPDATE customer SET Total_Orders = 5 WHERE Profession = 'Artist';
+UPDATE customer SET Total_Orders = 6 WHERE Profession = 'Doctor';
+ UPDATE customer SET Total_Orders = 7 WHERE Profession = 'Entertainment';
+ UPDATE customer SET Total_Orders = 8 WHERE Profession = 'Lawyer';
+-- Select Total_Orders from customer;
+UPDATE customer SET Registration_Date = '2022-05-06' WHERE Profession = 'Artist';
+UPDATE customer SET Registration_Date = '2022-06-06' WHERE Profession = 'Doctor'; 
+UPDATE customer SET Registration_Date = '2022-07-06' WHERE Profession = 'Entertainment';
+UPDATE customer SET Registration_Date = '2022-08-06' WHERE Profession = 'Lawyer';
+-- select * from customer limit 200;
+
+select CustomerID from customer where profession = 'Artist' and `Annual Income ($)`> 16000;
+select CustomerID, profession from customer where profession = 'Doctor' or profession='Lawyer';
+
+
+
+-- ORDER BY: e.g. Sort customers by registration date (newest first)
+
+

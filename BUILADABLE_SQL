@@ -53,5 +53,10 @@ select CustomerID, profession from customer where profession = 'Doctor' or profe
 
 
 -- ORDER BY: e.g. Sort customers by registration date (newest first)
+- select * from  customer order BY Registration_Date limit 200;
+-- select * from customer order by age limit 100;
+-- select * from customer order by `Annual Income ($)`;
+
+-----------------------------------------------------------------------------------------------------------------------
 
 

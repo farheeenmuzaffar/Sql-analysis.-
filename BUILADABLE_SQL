@@ -4,7 +4,7 @@ CREATE TABLE customer (
     CustomerID INT PRIMARY KEY,
     Gender VARCHAR(50) NOT NULL,
     Age INT NOT NULL,
-    `Annual Income ($)` INT NOT NULL,       -- Fixed: using backticks
+    `Annual Income ($)` INT NOT NULL,       -- Fixed: using backtick
     `Spending Score (1-100)` INT NOT NULL,  -- Fixed: using backticks
     Profession VARCHAR(100),
     `Work Experience` INT,                  -- Fixed: using backticks
@@ -59,4 +59,84 @@ select CustomerID, profession from customer where profession = 'Doctor' or profe
 
 -----------------------------------------------------------------------------------------------------------------------
 
+DAY 2
+SELECT COUNT(DISTINCT customer_city) FROM customers;
+ count
+-------
+  4119
+select sum (outlet_establishment_year) from sales;
+   sum
+---------
+ 2655027
+(1 row)
+ select min (item_weight) from sales;
+  min
+-------
+ 4.555
+(1 row)
+ select max (item_weight) from sales;
+  max
+-------
+ 21.35
+(1 row)
+select max (item_weight),min (item_weight) from sales;
+  max  |  min
+-------+-------
+ 21.35 | 4.555
+(1 row)
+select max (item_weight) as highest_weight ,min (item_weight) as lowest_weight from sales;
+ highest_weight | lowest_weight
+----------------+---------------
+          21.35 |         4.555
+(1 row)
+postgres=# SELECT item_type, AVG(item_weight) AS avg_weight
+postgres-# FROM sales
+postgres-# GROUP BY item_type
+postgres-# ORDER BY avg_weight DESC;
+       item_type       |     avg_weight
+-----------------------+---------------------
+ Seafood               | 15.7840000000000000
+ Breakfast             | 14.6003125000000000
+ Others                | 14.5622916666666667
+ Health and Hygiene    | 13.8054255319148936
+ Fruits and Vegetables | 13.7400000000000000
+ Household             | 13.5714230769230769
+ Starchy Foods         | 13.5502500000000000
+ Snack Foods           | 13.1431250000000000
+ Meat                  | 12.8070491803278689
+ Dairy                 | 12.6338202247191011
+ Canned                | 12.3844736842105263
+ Soft Drinks           | 12.1220909090909091
+ Frozen Foods          | 11.8933333333333333
+ Hard Drinks           | 11.5956521739130435
+ Baking Goods          | 11.0902906976744186
+ Breads                | 10.9750000000000000
+(16 rows)
+postgres=# SELECT item_type, SUM(item_weight) AS avg_weight
+postgres-# FROM sales
+postgres-# GROUP BY item_type;
+       item_type       | avg_weight
+-----------------------+------------
+ Health and Hygiene    |    648.855
+ Meat                  |    781.230
+ Household             |   1764.285
+ Dairy                 |   1124.410
+ Seafood               |      78.92
+ Others                |    349.495
+ Breakfast             |    233.605
+ Hard Drinks           |    266.700
+ Fruits and Vegetables |   2061.000
+ Breads                |    373.150
+ Snack Foods           |   2208.045
+ Canned                |    941.220
+ Soft Drinks           |    666.715
+ Baking Goods          |    953.765
+ Starchy Foods         |    271.005
+ Frozen Foods          |   1213.120
+
+postgres=# SELECT MAX(item_weight) FROM sales WHERE item_weight > 20.75;
+  max
+-------
+ 21.35
+(1 row)
 
